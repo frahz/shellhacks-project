@@ -21,6 +21,8 @@ def forget_menu_screen():
 
 
 def remember_menu_screen():
+    title.pack(side=TOP)
+    menu_question.pack(side=TOP)
     bt1.pack(side=TOP, expand=YES)
     bt2.pack(side=TOP, expand=YES)
     bt3.pack(side=TOP, expand=YES)
@@ -38,18 +40,20 @@ def remember_menu_screen():
     account_num_button_for_savings.pack_forget()
     account_num_input_for_credit.pack_forget()
     account_num_button_for_credit.pack_forget()
-
-
-def credit_card_menu():
-    pass
-
-
-def checkings_menu():
-    pass
-
-
-def savings_menu():
-    pass
+    bt1_for_credit.pack_forget()
+    bt2_for_credit.pack_forget()
+    bt1_for_checkings.pack_forget()
+    bt2_for_checkings.pack_forget()
+    bt3_for_checkings.pack_forget()
+    bt1_for_savings.pack_forget()
+    bt2_for_savings.pack_forget()
+    bt3_for_savings.pack_forget()
+    second_input.pack_forget()
+    deposit_question1.pack_forget()
+    dep_input1.pack_forget()
+    deposit_question2.pack_forget()
+    dep_input2.pack_forget()
+    button_dep.pack_forget()
 
 
 # Form Funtions
@@ -168,9 +172,69 @@ def deposit_submit_amount_clicked():
     label = tkinter.Label(text=pls)
     label.pack()
 
+# Forget Account Number Prompt Screen Functions
+
+
+def forget_prompt_checkings():
+    account_num_for_checkings.pack_forget()
+    account_num_input_for_checkings.pack_forget()
+    account_num_button_for_checkings.pack_forget()
+
+
+def forget_prompt_savings():
+    account_num_for_savings.pack_forget()
+    account_num_input_for_savings.pack_forget()
+    account_num_button_for_savings.pack_forget()
+
+
+def forget_prompt_credit():
+    account_num_for_credit.pack_forget()
+    account_num_input_for_credit.pack_forget()
+    account_num_button_for_credit.pack_forget()
+
+# More Forget Functions
+
+
+def forget_checkings_options():
+    bt1_for_checkings.pack_forget()
+    bt2_for_checkings.pack_forget()
+    bt3_for_checkings.pack_forget()
+
+
+def forget_savings_options():
+    bt1_for_savings.pack_forget()
+    bt2_for_savings.pack_forget()
+    bt3_for_savings.pack_forget()
+
+
+def forget_credit_options():
+    bt1_for_credit.pack_forget()
+    bt2_for_credit.pack_forget()
 
 # Checkings and Savings Menu Functions After Id input
 
+
+def checkings_menu_transition():
+    forget_prompt_checkings()
+    bt1_for_checkings.pack(side=TOP, expand=YES)
+    bt2_for_checkings.pack(side=TOP, expand=YES)
+    bt3_for_checkings.pack(side=TOP, expand=YES)
+
+
+def savings_menu_transition():
+    forget_prompt_savings()
+    bt1_for_savings.pack(side=TOP, expand=YES)
+    bt2_for_savings.pack(side=TOP, expand=YES)
+    bt3_for_savings.pack(side=TOP, expand=YES)
+
+
+def credit_card_menu_transition():
+    forget_prompt_credit()
+    bt1_for_credit.pack(side=TOP, expand=YES)
+    bt2_for_credit.pack(side=TOP, expand=YES)
+
+
+# Checkings and Savings Menu Functions After Id input
 def checkings_menu_transition():
     pass
 
@@ -206,13 +270,50 @@ bt.config(anchor=CENTER)
 bt.pack()
 
 # Credit Card Menu
+bt1_for_credit = tkinter.Button(
+    text='Deposit', width=15, height=2, command=deposit_clicked)
+bt1_for_credit.pack(side=TOP, expand=YES)
+bt1_for_credit.pack_forget()
+
+bt2_for_credit = tkinter.Button(
+    text='Menu', width=15, height=2, command=remember_menu_screen)
+bt2_for_credit.pack(side=TOP, expand=YES)
+bt2_for_credit.pack_forget()
+
+# New Account Forms, Account type, Nickname, Intial Deposit
 
 
 # Checkings Menu
+bt1_for_checkings = tkinter.Button(
+    text='Deposit', width=15, height=2, command=deposit_clicked)
+bt1_for_checkings.pack(side=TOP, expand=YES)
+bt1_for_checkings.pack_forget()
 
+bt2_for_checkings = tkinter.Button(
+    text='Withdraw', width=15, height=2, command=withdraw_clicked)
+bt2_for_checkings.pack(side=TOP, expand=YES)
+bt2_for_checkings.pack_forget()
+
+bt3_for_checkings = tkinter.Button(
+    text='Menu', width=15, height=2, command=remember_menu_screen)
+bt3_for_checkings.pack(side=TOP, expand=YES)
+bt3_for_checkings.pack_forget()
 
 # Savings Menu
+bt1_for_savings = tkinter.Button(
+    text='Deposit', width=15, height=2, command=deposit_clicked)
+bt1_for_savings.pack(side=TOP, expand=YES)
+bt1_for_savings.pack_forget()
 
+bt2_for_savings = tkinter.Button(
+    text='Withdraw', width=15, height=2, command=withdraw_clicked)
+bt2_for_savings.pack(side=TOP, expand=YES)
+bt2_for_savings.pack_forget()
+
+bt3_for_savings = tkinter.Button(
+    text='Menu', width=10, height=2, command=remember_menu_screen)
+bt3_for_savings.pack(side=TOP, expand=YES)
+bt3_for_savings.pack_forget()
 
 # Withdraw Form
 withdraw_question1 = tkinter.Label(
@@ -237,7 +338,6 @@ button_withdraw = tkinter.Button(text='Submit', width=10, height=2,
                                  command=withdraw_submit_amount_clicked)
 button_withdraw.pack(anchor=CENTER, expand=YES)
 button_withdraw.pack_forget()
-
 
 # Deposit Form
 deposit_question1 = tkinter.Label(
