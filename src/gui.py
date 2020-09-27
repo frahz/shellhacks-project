@@ -89,9 +89,12 @@ def account_num_prompt_for_checkings():
         account_id = None
     else:
         account_id = account_num_input_for_checkings.get()
-    account_num_for_checkings.pack(side=TOP, expand=YES)
-    account_num_input_for_checkings.pack(side=TOP, expand=YES)
-    account_num_button_for_checkings.pack(side=TOP, expand=YES)
+    pls = shapi.verifyCustomerId(account_id)
+    label = tkinter.Label(text=pls)
+    label.pack()
+    # account_num_for_checkings.pack(side=TOP, expand=YES)
+    # account_num_input_for_checkings.pack(side=TOP, expand=YES)
+    # account_num_button_for_checkings.pack(side=TOP, expand=YES)
 
 
 def account_num_prompt_for_savings():
@@ -100,6 +103,9 @@ def account_num_prompt_for_savings():
         account_id = None
     else:
         account_id = account_num_input_for_savings.get()
+    pls = shapi.verifyCustomerId(account_id)
+    label = tkinter.Label(text=pls)
+    label.pack()
     account_num_for_savings.pack(side=TOP, expand=YES)
     account_num_input_for_savings.pack(side=TOP, expand=YES)
     account_num_button_for_savings.pack(side=TOP, expand=YES)
@@ -107,13 +113,18 @@ def account_num_prompt_for_savings():
 
 def account_num_prompt_for_credit():
     # global account_id
-    if account_num_input_for_credit.get() == "":
-        account_id = None
-    else:
-        account_id = account_num_input_for_credit.get()
     account_num_for_credit.pack(side=TOP, expand=YES)
     account_num_input_for_credit.pack(side=TOP, expand=YES)
     account_num_button_for_credit.pack(side=TOP, expand=YES)
+    menu_for_credit.pack(side=TOP, expand=YES)
+    if account_num_input_for_credit.get() == "":
+        account_id = None
+    else:
+        account_id = str(account_num_input_for_credit.get())
+    pls = shapi.verifyCustomerId(account_id)
+    label = tkinter.Label(text=pls)
+    label.pack()
+
 # Click Functions
 
 
@@ -171,6 +182,7 @@ def deposit_submit_amount_clicked():
     pls = shapi.deposit(amount=amount, description=description)
     label = tkinter.Label(text=pls)
     label.pack()
+
 
 # Forget Account Number Prompt Screen Functions
 
@@ -234,19 +246,6 @@ def credit_card_menu_transition():
     bt2_for_credit.pack(side=TOP, expand=YES)
 
 
-# Checkings and Savings Menu Functions After Id input
-def checkings_menu_transition():
-    pass
-
-
-def savings_menu_transition():
-    pass
-
-
-def credit_card_menu_transition():
-    pass
-
-
 # Title
 title = tkinter.Label(text="Welcome to our banking App",
                       font=("Arial Bold", 30), bg="light blue")
@@ -256,13 +255,16 @@ menu_question = tkinter.Label(text="What type of account do you have?", font=(
     "Arial Bold", 22), bg="light blue")
 menu_question.pack(side=TOP)
 
+
 # Menu Screen Buttons
 bt1 = tkinter.Button(text='Credit Card', width=15,
                      height=2, command=credit_card_clicked)
 bt1.pack(side=TOP, expand=YES)
-bt2 = tkinter.Button(text='Checkings', width=15, height=2)
+bt2 = tkinter.Button(text='Checkings', width=15,
+                     height=2, command=checkings_clicked)
 bt2.pack(side=TOP, expand=YES)
-bt3 = tkinter.Button(text='Savings', width=15, height=2)
+bt3 = tkinter.Button(text='Savings', width=15,
+                     height=2, command=savings_clicked)
 bt3.pack(side=TOP, expand=YES)
 bt = tkinter.Button(window, text="New Account", width=10,
                     height=1, command=withdraw_clicked)
@@ -399,6 +401,11 @@ account_num_button_for_checkings = tkinter.Button(
 account_num_button_for_checkings.pack(anchor=CENTER, expand=YES)
 account_num_button_for_checkings.pack_forget()
 
+menu_for_checkings = tkinter.Button(
+    text='Menu', width=15, height=2, command=remember_menu_screen)
+menu_for_checkings.pack(side=TOP, expand=YES)
+menu_for_checkings.pack_forget()
+
 # Account Num Prompt for Savings
 account_num_for_savings = tkinter.Label(
     window, text="Please Enter your Account Number Below.", bg='white')
@@ -414,6 +421,11 @@ account_num_button_for_savings = tkinter.Button(
 account_num_button_for_savings.pack(anchor=CENTER, expand=YES)
 account_num_button_for_savings.pack_forget()
 
+menu_for_savings = tkinter.Button(
+    text='Menu', width=15, height=2, command=remember_menu_screen)
+menu_for_savings.pack(side=TOP, expand=YES)
+menu_for_savings.pack_forget()
+
 # Account Num Prompt for Credit Card
 account_num_for_credit = tkinter.Label(
     window, text="Please Enter your Account Number Below.", bg='white')
@@ -428,6 +440,11 @@ account_num_button_for_credit = tkinter.Button(
     text='Submit', width=10, height=2, command=credit_card_menu_transition)
 account_num_button_for_credit.pack(anchor=CENTER, expand=YES)
 account_num_button_for_credit.pack_forget()
+
+menu_for_credit = tkinter.Button(
+    text='Menu', width=15, height=2, command=remember_menu_screen)
+menu_for_credit.pack(side=TOP, expand=YES)
+menu_for_credit.pack_forget()
 
 
 window.mainloop()

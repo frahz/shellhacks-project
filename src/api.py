@@ -3,7 +3,7 @@ import json
 import random
 import datetime
 
-apiKey = "YOUR-API-KEY-HERE"
+apiKey = "2b6a3f2d6c0a4e58fe27c130bc198782"
 
 
 def newCustomerId():
@@ -29,6 +29,19 @@ def getCustomerId():
     for person in data:
         if acc_num in person["account_number"]:
             return person["_id"]
+    else:
+        return "ERROR: Account Number is incorrect"
+
+
+def verifyCustomerId(acc_num):
+    global apiKey
+
+    url = f"http://api.reimaginebanking.com/accounts?key={apiKey}"
+    response = requests.get(url)
+    data = json.loads(response.text)
+    for person in data:
+        if acc_num in person["account_number"]:
+            return "Account Number exists"
     else:
         return "ERROR: Account Number is incorrect"
 
