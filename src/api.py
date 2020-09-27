@@ -141,38 +141,35 @@ def withdraw(amount, description):
         return "Sadge"
 
 
-def loan():
+def loan(_type, amount, months, creditScore):
     global apiKey
-    loan_type = ["home", "auto", "small business"]
     currentDay = datetime.date.today().isoformat()
     loan_id = newCustomerId()
 
     customerId = getCustomerId()
-    print("What type of loan are you trying to get today:")
-    print("1. Home Loan\n2. Auto Loan\n3. Small Business Loan\n0. Back")
-    n = int(input())
+    # print("What type of loan are you trying to get today:")
+    # print("1. Home Loan\n2. Auto Loan\n3. Small Business Loan\n0. Back")
+    # n = int(input())
 
-    creditScore = int(input("What is your current credit score: "))
+    # creditScore = int(input("What is your current credit score: "))
 
-    if n == 1 and creditScore < 720:
+    if _type == "home" and creditScore < 720:
         return "Sorry, you are not currently eligble for a home loan."
-    elif n == 2 and creditScore < 650:
+    elif _type == "auto" and creditScore < 650:
         return "Sorry, you are not currently eligble for an auto loan."
-    elif n == 3 and creditScore < 680:
+    elif _type == "small business" and creditScore < 680:
         return "Sorry, you are not currently eligble for a small business loan."
-    elif n == 0:
-        pass
 
-    amount = int(
-        input(f"What is the total loan amount for the {loan_type[n-1]} loan: "))
-    months = int(input(
-        f"What do you want the duration of the {loan_type[n-1]} loan to be (in months): "))
+    # amount = int(
+    #     input(f"What is the total loan amount for the {loan_type[n-1]} loan: "))
+    # months = int(input(
+    #     f"What do you want the duration of the {loan_type[n-1]} loan to be (in months): "))
     monthlyPayment = amount // months
-    description = input("Add comment to loan or leave empty if none: ")
+    description = ""  # input("Add comment to loan or leave empty if none: ")
 
     url = f"http://api.reimaginebanking.com/accounts/{customerId}/loans?key={apiKey}"
     payload = {
-        "type": loan_type[n-1],
+        "type": _type,
         "status": "pending",
         "credit_score": creditScore,
         "monthly_payment": monthlyPayment,
@@ -187,6 +184,6 @@ def loan():
     )
 
     if r.status_code == 201:
-        print("loan creation successful.")
+        return "loan creation successful."
     else:
-        print("Sadge", r.status_code)
+        return "Sadge"
