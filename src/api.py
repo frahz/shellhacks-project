@@ -3,7 +3,7 @@ import json
 import random
 import datetime
 
-apiKey = "2b6a3f2d6c0a4e58fe27c130bc198782"
+apiKey = "YOUR-API-KEY-HERE"
 
 
 def newCustomerId():
