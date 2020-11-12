@@ -65,7 +65,8 @@ def newCustomer():
 
     if n == 2 or n == 3:
         balance = int(input("How much do you want to deposit initially: "))
-
+    else:
+        balance = None
     payload = {
         "type": acc_type[n-1],
         "nickname": nickname,
